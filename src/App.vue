@@ -5,6 +5,7 @@ import { ref } from 'vue';
 
   function tampil(){
     console.log("tampilkan saja dulu")
+    console.log("coba lagi dan lagi")
   }
 
 </script>
