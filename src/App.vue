@@ -4,8 +4,7 @@ import { ref } from 'vue';
   let nama = ref("ikrar aprianto")
 
   function tampil(){
-    console.log("tampilkan saja dulu")
-    console.log("coba lagi dan lagi")
+    nama.value = "berganti lagi"
   }
 
 </script>
