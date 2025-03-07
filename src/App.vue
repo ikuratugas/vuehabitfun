@@ -14,7 +14,11 @@ import { ref } from 'vue';
   <main>
     <h2>coba saja dulu {{ nama }}</h2>
     <br>
-    <button @click="tampil">{{ nama }}</button>
+
+    <button @click="tampil" >{{ nama }}</button>
+    <!-- // bisa juga begini -->
+    <!-- <button v-on:click="tampil" >{{ nama }}</button> -->
+
   </main>
 </template>
 
