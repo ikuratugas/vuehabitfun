@@ -1,10 +1,10 @@
 <script setup>
 import { ref } from 'vue';
 
-  let nama = ref("ikrar aprianto")
+  let nama = ref(false)
 
   function tampil(){
-    nama.value = "berganti lagi"
+    nama.value = !nama.value 
   }
 
 </script>
