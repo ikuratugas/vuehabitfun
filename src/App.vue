@@ -1,13 +1,23 @@
 <script setup>
 import { ref } from 'vue';
 
-  let nama = ref(false)
+  const nama = ref(false)
 
-  let listNama = ref([
+  const listNama = ref([
     "ikrar",
     "tanti",
     "selvi",
   ])
+
+  const friends = ref(
+    [
+      "adam",
+      "sarif",
+      "asrul",
+      "almin",
+      "vito",
+    ]
+  )
 
   function tampil(){
     nama.value = !nama.value
@@ -28,6 +38,11 @@ import { ref } from 'vue';
       </ul>
     </h3>
 
+    <h2>List Friends</h2>
+    <ul v-for="(item, i) in friends">
+      <li>no. {{ i+1 }} - {{ item }}</li>
+    </ul>
+
     <br>
     <button v-on:click="tampil">Ubah Nilai</button>
     <!-- // bisa juga begini -->
@@ -35,4 +50,3 @@ import { ref } from 'vue';
 
   </main>
 </template>
-
