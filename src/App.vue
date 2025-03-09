@@ -4,6 +4,10 @@ import { ref } from 'vue';
 
   const tampilkan = ref(false)
 
+  function isiText(e) {
+    inputNama.value = e.target.value
+  }   
+  
   function tampil(){
     tampilkan.value = true
 
@@ -17,7 +21,8 @@ import { ref } from 'vue';
 <template>
   <h1>Belajar ulang lagi, suka pemprograman</h1>
   <main>
-    <input v-model="inputNama" type="text" name="" id="">
+    <!-- <input v-model="inputNama" type="text" name="" id=""> -->
+    <input type="text" :value="inputNama" @input="isiText">
     <br>
     <button @click="tampil">Tampilkan nama</button>
 
