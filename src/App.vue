@@ -1,30 +1,23 @@
 <script setup>
 import { ref } from 'vue';
-  const inputNama = ref("")
 
-  const tampilkan = ref(false)
+  const nilai = ref(0);
+  
 
-  function tampil(){
-    tampilkan.value = true
+  function tambah(){
+    nilai.value+=1
+  }
 
-    setTimeout(function(){
-      tampilkan.value = false
-    }, 3000)
-
+  function kurang(){
+    nilai.value-=1
   }
 </script>
-
 <template>
-  <h1>Belajar ulang lagi, suka pemprograman</h1>
   <main>
-    <input v-model="inputNama" type="text" name="" id="">
-    <br>
-    <button @click="tampil">Tampilkan nama</button>
-
-    <h2 v-if="tampilkan">
-      Hai, {{ inputNama  }}👋
-    </h2>
-
+    <h1>Mencoba membuat counter tanpa melihat sumber lain, just coding</h1>
+    <button @click="tambah"> Tambah </button> 
+    <p>{{ nilai }}</p>
+    <button @click="kurang"> Tambah </button> 
   </main>
 </template>
 
