@@ -4,9 +4,9 @@ import { ref } from 'vue';
   let idnya = 0
 
   const listNama = ref([
-    {id: idnya++, nama: "ikura"},
-    {id: idnya++, nama: "sensei farchan"},
-    {id: idnya++, nama: "senpai rahmat"},
+    {id: idnya++, nama: "ikura", checked: false},
+    {id: idnya++, nama: "sensei farchan", checked: false},
+    {id: idnya++, nama: "senpai rahmat", checked: false},
   ])
 
   const tampungText = ref("")
@@ -22,6 +22,10 @@ import { ref } from 'vue';
     tampilkanMasukkanNama.value = false
   }
 
+  function ubahListNama(listnya){
+    
+  }
+
   function hapusListNama(id){
     // listNama.value = listNama.value.filter((t) => t.id !== id.id) // bisa juga gini kok
     listNama.value = listNama.value.filter((t) => t !== id)
@@ -32,12 +36,25 @@ import { ref } from 'vue';
   <main>
     <input type="text" v-model="tampungText">
     <p v-if="tampilkanMasukkanNama">Gagal menambahkan! Jangan kosongkan field-nya</p>
+    <br>
     <button @click="tambahListNama" type="button">Tambah Data</button>
 
     <ul v-for="i in listNama" :key="listNama.id">
-      <li> {{ i.nama }}</li>
+      <input type="checkbox" v-model="i.checked">
+      <li :class="{ checked: i.checked }">{{ i.nama }}</li>
       <button @click="hapusListNama(i)">Hapus</button>
     </ul>
   </main>
 </template>
+
+<style>
+  /* ul li{
+    font-style: italic;
+    text-decoration: line-through;
+  } */
+  .checked{
+    font-style: italic;
+    text-decoration: line-through;
+  }
+</style>
 
