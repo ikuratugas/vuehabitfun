@@ -1,42 +1,25 @@
 <script setup>
 import { ref } from 'vue';
+
+  let idnya = 0
+
   const listNama = ref([
-    "ikrar",
-    "anto",
-    "rian",
+    {id: idnya++, nama: "ikrar aprianto"},
+    {id: idnya++, nama: "tanti ade destiani"},
+    {id: idnya++, nama: "selvi"},
   ])
 
-  const listNamaReset = ref([
-    "ikrar",
-    "anto",
-    "rian",
-  ])
-
-
-  const tampil = ref(false)
-
-  function clickTampil(){
-    tampil.value = !tampil.value
+  function hapusListNama(id){
+    // listNama.value = listNama.value.filter((t) => t.id !== id.id) // bisa juga gini kok
+    listNama.value = listNama.value.filter((t) => t !== id)
   }
 
-  function hapusList(v){
-    listNama.value = listNama.value.filter((t) => t !== v)
-    console.log()
-    if (listNama.value.length === 0){
-      listNama.value = listNamaReset.value
-    }
-  }
-
-  console.log("coba saja dulu ini")
 </script>
 <template>
   <main>
-    <h1>Belajar List tanpa lihat source apapun</h1>
-    <button @click="clickTampil">Tampilkan Nama-nama yang tersedia</button>
-    <ul v-for="val in listNama" :key="listNama"  v-if="tampil">
-      <li>{{ val }}</li>
-      <button @click="hapusList(val)">X</button>
-      <br>
+    <ul v-for="i in listNama" :key="listNama.id">
+      <li> {{ i.nama }}</li>
+      <button @click="hapusListNama(i)">Hapus</button>
     </ul>
   </main>
 </template>
