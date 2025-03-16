@@ -33,7 +33,7 @@ import { ref } from 'vue';
   <main>
     <h1>Belajar List tanpa lihat source apapun</h1>
     <button @click="clickTampil">Tampilkan Nama-nama yang tersedia</button>
-    <ul v-for="val in listNama"  v-if="tampil">
+    <ul v-for="val in listNama" :key="listNama"  v-if="tampil">
       <li>{{ val }}</li>
       <button @click="hapusList(val)">X</button>
       <br>
