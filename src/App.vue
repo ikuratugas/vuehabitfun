@@ -10,13 +10,16 @@ import { ref } from 'vue';
   ])
 
   const tampungText = ref("")
+  const tampilkanMasukkanNama = ref(false)
 
   function tambahListNama(){
     if (tampungText.value === ""){
-      console.log("mohon masukkan nama lain")
+      console.log("mohon masukkan nama")
+      tampilkanMasukkanNama.value = true
       return null
     }
     listNama.value.push({id: idnya++, nama: tampungText.value})
+    tampilkanMasukkanNama.value = false
   }
 
   function hapusListNama(id){
@@ -28,7 +31,9 @@ import { ref } from 'vue';
 <template>
   <main>
     <input type="text" v-model="tampungText">
+    <p v-if="tampilkanMasukkanNama">Gagal menambahkan! Jangan kosongkan field-nya</p>
     <button @click="tambahListNama" type="button">Tambah Data</button>
+
     <ul v-for="i in listNama" :key="listNama.id">
       <li> {{ i.nama }}</li>
       <button @click="hapusListNama(i)">Hapus</button>
