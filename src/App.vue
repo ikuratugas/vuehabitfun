@@ -4,7 +4,7 @@ import { ref } from 'vue';
   let idnya = 0
   const tampungText = ref("")
   const tampilkanMasukkanNama = ref(false)
-  const tampilkanSemuaListNama = ref(false)
+  const tampilkanBelumCentang= ref(true)
 
   const listNama = ref([
     {id: idnya++, nama: "ikura", checked: true},
@@ -13,8 +13,11 @@ import { ref } from 'vue';
   ])
 
   function listNamaBelumCentang(){
-    return listNama.value.filter((t) => t.checked === false)
+    return tampilkanBelumCentang.value ?
+      listNama.value.filter((t) => t.checked === false):
+      listNama.value
   }
+
   function tambahListNama(){
     if (tampungText.value === ""){
       console.log("mohon masukkan nama")
@@ -42,7 +45,7 @@ import { ref } from 'vue';
     <br>
     <button @click="tambahListNama" type="button">Tambah Data</button>
 
-    <ul v-for="i in (tampilkanSemuaListNama ? listNama : listNamaBelumCentang())" :key="listNama.id">
+    <ul v-for="i in (listNamaBelumCentang())" :key="listNama.id">
       <li :class=" { tercentang: i.checked }">
         <input type="checkbox" v-model="i.checked">
         {{ i.nama }}
@@ -50,7 +53,7 @@ import { ref } from 'vue';
       <button @click="hapusListNama(i)">Hapus</button>
     </ul>
     <br>
-    <button @click="tampilkanSemuaListNama = !tampilkanSemuaListNama">Coba saja dulu</button>
+    <button @click="tampilkanBelumCentang = !tampilkanBelumCentang">{{ tampilkanBelumCentang ?  "Tutup" : "Tampilkan Semua"}}</button>
   </main>
 </template>
 
