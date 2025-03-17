@@ -22,10 +22,6 @@ import { ref } from 'vue';
     tampilkanMasukkanNama.value = false
   }
 
-  function ubahListNama(listnya){
-    
-  }
-
   function hapusListNama(id){
     // listNama.value = listNama.value.filter((t) => t.id !== id.id) // bisa juga gini kok
     listNama.value = listNama.value.filter((t) => t !== id)
@@ -41,18 +37,15 @@ import { ref } from 'vue';
 
     <ul v-for="i in listNama" :key="listNama.id">
       <input type="checkbox" v-model="i.checked">
-      <li :class="{ checked: i.checked }">{{ i.nama }}</li>
+      <li :class="{ tercentang: i.checked }">{{ i.nama }}</li>
+      <p :class="{ tercentang: i.checked}">apa ini</p>
       <button @click="hapusListNama(i)">Hapus</button>
     </ul>
   </main>
 </template>
 
 <style>
-  /* ul li{
-    font-style: italic;
-    text-decoration: line-through;
-  } */
-  .checked{
+  .tercentang{
     font-style: italic;
     text-decoration: line-through;
   }
