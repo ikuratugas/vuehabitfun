@@ -24,7 +24,10 @@ import { ref } from 'vue';
 
   function hapusListNama(id){
     // listNama.value = listNama.value.filter((t) => t.id !== id.id) // bisa juga gini kok
-    listNama.value = listNama.value.filter((t) => t !== id)
+    // listNama.value = listNama.value.filter((t) => t !== id) // other alternatif
+    listNama.value = listNama.value.filter(function (t) {
+      return t !== id
+    })
   }
 
 </script>
