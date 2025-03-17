@@ -2,23 +2,27 @@
 import { ref } from 'vue';
 
   let idnya = 0
+  const tampungText = ref("")
+  const tampilkanMasukkanNama = ref(false)
+  const tampilkanSemuaListNama = ref(false)
 
   const listNama = ref([
-    {id: idnya++, nama: "ikura", checked: false},
+    {id: idnya++, nama: "ikura", checked: true},
     {id: idnya++, nama: "sensei farchan", checked: false},
     {id: idnya++, nama: "senpai rahmat", checked: false},
   ])
 
-  const tampungText = ref("")
-  const tampilkanMasukkanNama = ref(false)
-
+  function listNamaBelumCentang(){
+    return listNama.value.filter((t) => t.checked === false)
+  }
   function tambahListNama(){
     if (tampungText.value === ""){
       console.log("mohon masukkan nama")
       tampilkanMasukkanNama.value = true
       return null
     }
-    listNama.value.push({id: idnya++, nama: tampungText.value})
+
+    listNama.value.push({id: idnya++, nama: tampungText.value, checked: false})
     tampilkanMasukkanNama.value = false
   }
 
@@ -38,12 +42,15 @@ import { ref } from 'vue';
     <br>
     <button @click="tambahListNama" type="button">Tambah Data</button>
 
-    <ul v-for="i in listNama" :key="listNama.id">
-      <input type="checkbox" v-model="i.checked">
-      <li :class="{ tercentang: i.checked }">{{ i.nama }}</li>
-      <p :class="{ tercentang: i.checked}">apa ini</p>
+    <ul v-for="i in (tampilkanSemuaListNama ? listNama : listNamaBelumCentang())" :key="listNama.id">
+      <li :class=" { tercentang: i.checked }">
+        <input type="checkbox" v-model="i.checked">
+        {{ i.nama }}
+      </li>
       <button @click="hapusListNama(i)">Hapus</button>
     </ul>
+    <br>
+    <button @click="tampilkanSemuaListNama = !tampilkanSemuaListNama">Coba saja dulu</button>
   </main>
 </template>
 
