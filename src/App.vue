@@ -1,5 +1,5 @@
 <script setup>
-import { computed, ref } from 'vue';
+import { ref } from 'vue';
 
   let idnya = 0
   const tampungText = ref("")
@@ -12,6 +12,13 @@ import { computed, ref } from 'vue';
     {id: idnya++, nama: "senpai rahmat", checked: false},
   ])
 
+
+  // ** BELUM PAHAM APA BEDANYA DENGAN COMPUTED() PADAHAL BISA JUGA BEGEINI
+  // function listNamaBelumCentang ()  {
+  //   return tampilkanBelumCentang.value ?
+  //     listNama.value.filter((t) => !t.checked):
+  //     listNama.value
+  // }
 
   const listNamaBelumCentang = computed(() => {
     return tampilkanBelumCentang.value ?
@@ -50,6 +57,8 @@ import { computed, ref } from 'vue';
     <br>
 
     <ul>
+      <!-- masih belum apa bedanya computed dan function biasa saja ini -->
+      <!-- <li v-for="todo in (listNamaBelumCentang())" :key="todo.id"> -->
       <li v-for="todo in (listNamaBelumCentang)" :key="todo.id">
       <input type="checkbox" v-model="todo.checked">
       <span :class="{ tercentang: todo.checked}">{{ todo.nama}}</span>
