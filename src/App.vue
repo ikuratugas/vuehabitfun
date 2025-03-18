@@ -1,10 +1,10 @@
 <script setup>
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 
   let idnya = 0
   const tampungText = ref("")
   const tampilkanMasukkanNama = ref(false)
-  const tampilkanBelumCentang= ref(true)
+  const tampilkanBelumCentang= ref(false)
 
   const listNama = ref([
     {id: idnya++, nama: "ikura", checked: true},
@@ -12,11 +12,12 @@ import { ref } from 'vue';
     {id: idnya++, nama: "senpai rahmat", checked: false},
   ])
 
-  function listNamaBelumCentang(){
+
+  const listNamaBelumCentang = computed(() => {
     return tampilkanBelumCentang.value ?
-      listNama.value.filter((t) => t.checked === false):
+      listNama.value.filter((t) => !t.checked):
       listNama.value
-  }
+  })
 
   function tambahListNama(){
     if (tampungText.value === ""){
@@ -27,6 +28,7 @@ import { ref } from 'vue';
 
     listNama.value.push({id: idnya++, nama: tampungText.value, checked: false})
     tampilkanMasukkanNama.value = false
+    tampungText.value = ""
   }
 
   function hapusListNama(id){
@@ -40,20 +42,22 @@ import { ref } from 'vue';
 </script>
 <template>
   <main>
-    <input type="text" v-model="tampungText">
-    <p v-if="tampilkanMasukkanNama">Gagal menambahkan! Jangan kosongkan field-nya</p>
+    <form @submit.prevent="tambahListNama">
+      <input type="text" v-model="tampungText">
+      <p v-if="tampilkanMasukkanNama">Gagal menambahkan! Jangan kosongkan field-nya</p>
+      <button @click="tambahListNama" type="button">Tambah Data</button>
+    </form>
     <br>
-    <button @click="tambahListNama" type="button">Tambah Data</button>
 
-    <ul v-for="i in (listNamaBelumCentang())" :key="listNama.id">
-      <li :class=" { tercentang: i.checked }">
-        <input type="checkbox" v-model="i.checked">
-        {{ i.nama }}
-      </li>
-      <button @click="hapusListNama(i)">Hapus</button>
-    </ul>
+    <ul>
+      <li v-for="todo in (listNamaBelumCentang)" :key="todo.id">
+      <input type="checkbox" v-model="todo.checked">
+      <span :class="{ tercentang: todo.checked}">{{ todo.nama}}</span>
+      <button @click="hapusListNama(todo)">X</button>
+    </li>
+  </ul>
     <br>
-    <button @click="tampilkanBelumCentang = !tampilkanBelumCentang">{{ tampilkanBelumCentang ?  "Tutup" : "Tampilkan Semua"}}</button>
+    <button @click="tampilkanBelumCentang = !tampilkanBelumCentang">{{ tampilkanBelumCentang ?  "Semua" : "Sembunyikan selesai"}}</button>
   </main>
 </template>
 
@@ -63,4 +67,5 @@ import { ref } from 'vue';
     text-decoration: line-through;
   }
 </style>
+
 
