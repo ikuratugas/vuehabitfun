@@ -19,6 +19,7 @@ import { computed, ref } from 'vue';
     }
     listNama.value.push({id: keyid++, nama:tampungText.value, centang: false})
     tampungText.value = ""
+    textDiIsiKosong.value =false 
   }
 
   let dataFilterListNama = computed(() => {
@@ -41,8 +42,11 @@ import { computed, ref } from 'vue';
 
   <main>
     <h1>Coba membuat CRUD</h1>
-    <input type="text" v-model="tampungText" placeholder="Masukkan Nama">
-    <button v-on:click="tambahData">tambah data</button>
+    <div>
+      <p style="color: red;" v-if="textDiIsiKosong">Inputan tidak boleh kosong</p>
+      <input type="text" v-model="tampungText" placeholder="Masukkan Nama">
+      <button v-on:click="tambahData">tambah data</button>
+    </div>
 
 	<ul>
 		<li v-for="item in dataFilterListNama" :key="item.id">
@@ -54,7 +58,7 @@ import { computed, ref } from 'vue';
 		</li>
 	</ul>
   <button v-on:click="merubahNilai">
-    {{ tampilkanSemuDatLisNama? "Tampilkan semua" : "Tampilkan Belum Tercentang" }}
+    {{ tampilkanSemuDatLisNama ? "Tampilkan semua" : "Tampilkan Belum Tercentang" }}
   </button>
   </main>
 
